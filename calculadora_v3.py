@@ -27,6 +27,7 @@ numero = []
 enteroMatriz = []
 enteroNumero = []
 
+#Prueba de filas, en el archivo.
 fila = ['....x.xxxxx.xxxxx.x...x.xxxxx.xxxxx.xxxxx.......xxxxx.xxxxx.xxxxx.....x','....x.....x.....x.x...x.x.....x.........x.....x.x...x.x...x.x...x.....x','....x.....x.....x.x...x.x.....x.........x....x..x...x.x...x.x...x.....x','....x.xxxxx.xxxxx.xxxxx.xxxxx.xxxxx.....x...x...xxxxx.xxxxx.x...x.....x','....x.x.........x.....x.....x.x...x.....x..x....x...x.....x.x...x.....x','....x.x.........x.....x.....x.x...x.....x.x.....x...x.....x.x...x.....x','....x.xxxxx.xxxxx.....x.xxxxx.xxxxx.....x.......xxxxx.xxxxx.xxxxx.....x']
 for i in range(7):										#Aquí se transforma el string fila[i] en una fila de "n" elementos
 	caracter.append([])

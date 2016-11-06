@@ -1,4 +1,0 @@
-debes ver los errores de ortografia del archivo de texto y resumirlo si es necesario
-dejar lo importante, el diagrama explica en 6 pasos como idealmente deberiamos pasar
-de un numero a una matriz que se une por filas tal y como las sacamos del txt para
-que no nos enrredemos

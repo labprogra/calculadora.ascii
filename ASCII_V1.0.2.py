@@ -262,23 +262,23 @@ submitFile.grid(column=1,row=1)
 
 #mensaje de error
 message = Label(leftFrame, text="", font=calibri)
-message.grid(columnspan=2, row=4)
+message.grid(columnspan=10, row=4)
 
 #operacion titulo
 Operation = Label(leftFrame, text="")
-Operation.grid(columnspan=3, row=3)
+Operation.grid(columnspan=10, row=3)
 
 #matriz de la operacion
 Matriz = Label(leftFrame, text="", font=font)
-Matriz.grid(columnspan=7, row=4)
+Matriz.grid(columnspan=10, row=4)
 
 #resultado titulo
 Result = Label(leftFrame, text="")
-Result.grid(columnspan=3, row=5)
+Result.grid(columnspan=10, row=5)
 
 #output, que deberia ser matriz resutado
 OUTPUT = Label(leftFrame, text="")
-OUTPUT.grid(columnspan=3, row=6)
+OUTPUT.grid(columnspan=10, row=6)
 
 #Status bar con la version del proyecto
 status = Label(root, text="Version 1.0.2 - Calculadora ASCII", bd=1, relief=SUNKEN, anchor=W)

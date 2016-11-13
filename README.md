@@ -6,6 +6,7 @@ ACTUALIZACION
 + interfaz grafica
 + validacion de errores como caracteres mal ubicados, espacios, filas mas largas etc
 + la informacion se muestra tanto en la terminal como en la GUI
++ la terminal ofrece un historial de las operaciones que se pueden usar mas adelante
 
 
 BUGS

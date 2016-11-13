@@ -199,9 +199,17 @@ def main():
 		elif (correctFile == "caracter erroneo"):
 			caracterError = "algun(os) caracter(es) no corresponde(n) a lo solicitado, modifique el archivo"
 			message.config(text=(ERROR+caracterError))
+			Operation.config(text="")
+			Result.config(text="")
+			OUTPUT.config(text="")
+			Matriz.config(text="")
 		elif (correctFile == False):
 			filaError = 'El largo de alguna(s) fila(s) no corresponde(n) al requerido, modifique el archivo'
 			message.config(text=(ERROR+filaError))
+			Operation.config(text="")
+			Result.config(text="")
+			OUTPUT.config(text="")
+			Matriz.config(text="")
 
 	except SyntaxError:
 		pass

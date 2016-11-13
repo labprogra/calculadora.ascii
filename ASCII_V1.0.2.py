@@ -248,15 +248,15 @@ leftFrame.pack(pady = 50, padx = 50)
 
 #texto de informacion
 text = Label(leftFrame, text="Ingresar el nombre del archivo:")
-text.grid(columnspan=2,row=0)
+text.grid(columnspan=10,row=0)
 
 #caja de entrada de texto
 box = Entry(leftFrame, textvariable="")
-box.grid(row=1)
+box.grid(columnspan=9,column=0,row=1)
 
 #boton para buscar
 submitFile = Button(leftFrame, text="Buscar", fg="black", command=main)
-submitFile.grid(column=1,row=1)
+submitFile.grid(column=10,row=1)
 
 #_____________________________________________________________________________
 

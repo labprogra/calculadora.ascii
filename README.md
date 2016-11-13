@@ -1,15 +1,16 @@
 # calculadora.ascii
 
 ACTUALIZACION
+-interfaz grafica
+-validacion de errores como caracteres mal ubicados, espacios, filas mas largas etc
+-la informacion se muestra tanto en la terminal como en la GUI
 
-logica de calculadora completa, se agregaron archivos de ejemplo para utilizar
-nombrados ej y enumerados, el archivo que dice error es un archivo que se escribio mal
-aproposito para que se puediera verificar si el programa encuentra fallas en archivos
-en este caso le faltaba un punto y en ves tenia un espacio
 
-PRIMER OBJETIVO(NOS FUIMOS A LA V)
+BUGS
+-cuando se inserta un numero solo, solamente devuelvo los de una sola cifra, los que tengan mas de una devolvera la primera
+-error en el espaciado de ventanas con el GUI hace que algunos textos se vean espacios entre letras
 
-realizar matrices para los 15 elementos a usar
---numeros del 1 al 9 incluyendo el 0
--- suma, resta, multiplicacion y division
---punto o coma
+OBJETIVOS
+-mejorar la interfaz grafica
+-arreglar bugs
+-hacer que el OUTPUT sea una matriz

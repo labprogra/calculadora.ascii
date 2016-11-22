@@ -227,7 +227,7 @@ class NumberToAscii:
 			if self.decimal:
 				self.decimalNumber += digit
 		try:
-			self.decimalNumber = self.decimalNumber[1]+self.decimalNumber[2]+self.decimalNumber[3]
+			self.decimalNumber = self.decimalNumber[1]+self.decimalNumber[2]+self.decimalNumber[3]+self.decimalNumber[4]
 		except Exception as e:
 			self.decimalNumber = ""
 		self.finalNumber = self.intNumber+self.decimalNumber

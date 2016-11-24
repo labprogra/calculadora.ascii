@@ -488,10 +488,12 @@ try:
  	root.iconbitmap('icon.ico')
 except Exception as e:
 	ubuntu = True
- 	tkMessageBox.showinfo("linux detectado", "debido a que usas una distribuicion de linux nos es imposible cambiar \n el icono de la ventana, para una proxima ves en windows funcionara mucho mejor")
+ 	tkMessageBox.showinfo("linux detectado", "debido a que usas una distro de linux nos es imposible cambiar \n el icono de la ventana, para una proxima ves en windows funcionara mucho mejor")
 
 #fuentes
-
+#para ubuntu u otra distro de linux debes descargar una fuente monoespaciada, en este caso se usa anonymous pro para ubuntu
+#se descarga desde: http://www.marksimonson.com/fonts/view/anonymous-pro
+#se copia con permisos root en la carpeta /usr/share/fonts 
 
 if ubuntu:
 	font = tkFont.Font(family="AnonymousPro", size=12)

@@ -488,15 +488,11 @@ try:
 except Exception as e:
  	tkMessageBox.showinfo("linux detectado", "debido a que usas una distribuicion de linux no es imposible cambiar \n el icono de la ventana, para una proxima ves en windows funcionara mucho mejor")
 
-
-#aqui es donde se elijen las fuentes que ocuparemos FixedSys para todas las matrices ya que tiene letras del mismo tamaño
+#fuentes
 font = tkFont.Font(family="FixedSys", size=12)
 #y calibri light para los textos por que se me hace bonita
 calibri = tkFont.Font(family="Calibri Light", size=12)
-
-#aqui le colocamos el tamaño con que se abrira inicialmente la ventana
 root.geometry("1200x700")
-#aqui creamos un "cuadro invisible imaginario" dentro de la ventana donde podemos colocar nuestros datos y le agregamos caracteristicas de diseño
 leftFrame = Frame(root)
 leftFrame.pack(pady = 50, padx = 50)
 

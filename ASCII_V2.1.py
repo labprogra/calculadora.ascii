@@ -484,12 +484,20 @@ root.bind("<Return>", main)
 # en Sistemas Operativos de linux no permite cambiar el icono de la ventana por lo que podemos detectar si el usuario lo abre desde linux o windows
 # con un simple try, de abrir el programa en linux se le mostrara un mensaje explicandole el fallo y recomendandole abrirlo en windows
 try:
+	ubuntu = False
  	root.iconbitmap('icon.ico')
 except Exception as e:
- 	tkMessageBox.showinfo("linux detectado", "debido a que usas una distribuicion de linux no es imposible cambiar \n el icono de la ventana, para una proxima ves en windows funcionara mucho mejor")
+	ubuntu = True
+ 	tkMessageBox.showinfo("linux detectado", "debido a que usas una distribuicion de linux nos es imposible cambiar \n el icono de la ventana, para una proxima ves en windows funcionara mucho mejor")
 
 #fuentes
-font = tkFont.Font(family="FixedSys", size=12)
+
+
+if ubuntu:
+	font = tkFont.Font(family="AnonymousPro", size=12)
+else:
+	font = tkFont.Font(family="FixedSys", size=12)
+
 #y calibri light para los textos por que se me hace bonita
 calibri = tkFont.Font(family="Calibri Light", size=12)
 root.geometry("1200x700")

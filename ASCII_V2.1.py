@@ -414,7 +414,10 @@ def instrucciones(event):
 root = Tk()
 root.title("Calculadora ASCII")
 root.bind("<Return>", main)
-root.iconbitmap('icon.ico')
+try:
+ 	root.iconbitmap('icon.ico')
+except Exception as e:
+ 	tkMessageBox.showinfo("linux detectado", "debido a que usas una distribuicion de linux no es imposible cambiar \n el icono de la ventana, para una proxima ves en windows funcionara mucho mejor")
 
 font = tkFont.Font(family="FixedSys", size=12)
 calibri = tkFont.Font(family="Calibri Light", size=12)

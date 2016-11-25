@@ -544,7 +544,7 @@ Result.grid(row=6,sticky=W+E+N+S)
 OUTPUT = Label(leftFrame, text="", font=font)
 OUTPUT.grid(row=7,sticky=W+E+N+S)
 #Status bar con la version del proyecto
-status = Label(root, text="Version 2.1.0 - Calculadora ASCII", bd=1, relief=SUNKEN, anchor=W)
+status = Label(root, text="Version 2.1.5 - Calculadora ASCII", bd=1, relief=SUNKEN, anchor=W)
 status.pack(side=BOTTOM, fill=X)
 
 root.mainloop()

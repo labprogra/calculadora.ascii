@@ -502,7 +502,6 @@ else:
 
 #y calibri light para los textos por que se me hace bonita
 calibri = tkFont.Font(family="Calibri Light", size=12)
-root.geometry("1200x700")
 leftFrame = Frame(root)
 leftFrame.pack(pady = 50, padx = 50)
 
@@ -513,37 +512,37 @@ usach.pack(side=TOP)
 
 #texto que le dice al usuario que ingrese el nombre del archivo
 text = Label(leftFrame, text="Ingresar el nombre del archivo:")
-text.grid(columnspan=10,row=0)
+text.grid(row=0,sticky=W+E+N+S)
 
 #caja de entrada de texto para que el usuario inserte el nombre del archivo
 box = Entry(leftFrame, textvariable="")
-box.grid(columnspan=9,column=0,row=1)
+box.grid(column=0,row=1,sticky=W+E+N+S)
 
 #boton para buscar que esta mapeado para que cuando haga click ejecute la funcion main
 submitFile = Button(leftFrame, text="Buscar", fg="black")
 submitFile.bind("<Button-1>", main)
-submitFile.grid(column=10,row=1)
+submitFile.grid(column=0,row=2,sticky=W+E+N+S)
 
 #boton de ayuda para que cuando se le haga click ejecute la funcion instrucciones
 HELP = Button(leftFrame, text="ayuda", fg="black", command = instrucciones)
-HELP.grid(column=11,row=1)
+HELP.grid(column=0,row=3,sticky=W+E+N+S)
 
 #mensaje  aleatorio que se usa como resguardo en caso de que alguno falle, o no se muestre
 message = Label(leftFrame, text="", font=calibri)
-message.grid(columnspan=10, row=4)
+message.grid(row=5,sticky=W+E+N+S)
 
 #operacion titulo
 Operation = Label(leftFrame, text="")
-Operation.grid(columnspan=10, row=3)
+Operation.grid(row=4,sticky=W+E+N+S)
 #matriz de la operacion
 Matriz = Label(leftFrame, text="", font=font)
-Matriz.grid(columnspan=10, row=4)
+Matriz.grid(row=5,sticky=W+E+N+S)
 #resultado titulo
 Result = Label(leftFrame, text="")
-Result.grid(columnspan=10, row=5)
+Result.grid(row=6,sticky=W+E+N+S)
 #esta es la matriz final en la salida
 OUTPUT = Label(leftFrame, text="", font=font)
-OUTPUT.grid(columnspan=10, row=6)
+OUTPUT.grid(row=7,sticky=W+E+N+S)
 #Status bar con la version del proyecto
 status = Label(root, text="Version 2.1.0 - Calculadora ASCII", bd=1, relief=SUNKEN, anchor=W)
 status.pack(side=BOTTOM, fill=X)

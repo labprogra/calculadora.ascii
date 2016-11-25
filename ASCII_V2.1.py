@@ -10,6 +10,7 @@ from sys import *
 from Tkinter import *
 import tkFont
 import tkMessageBox
+from tkFileDialog import *
 
 #_____________________________________________________________________________________________________________________________________________________________#
 
@@ -473,7 +474,111 @@ def instrucciones():
 	tkMessageBox.showinfo("instrucciones", instrucciones1+instrucciones2)
 
 #_____________________________________________________________________________________________________________________________________________________________#
+#A PARTIR DE AQUI HICE ALGO MUY PERO MUY FEO ASI QUE NUESTRA META ES ARREGLARLO POR QUE ESTA ES LA MADRE DE LAS MALAS PRACTICAS
+def buscar(archivo):
+	try:
+		file = File(archivo)
+		fileInOneRow = file.leerArchivo()
+		try:
+			#se ocupo un try aqui ya que en caso de ocurrir un error el programa no tiene que mostrar la matriz
+			matrix = fileInOneRow[0]+"\n"+fileInOneRow[1]+"\n"+fileInOneRow[2]+"\n"+fileInOneRow[3]+"\n"+fileInOneRow[4]+"\n"+fileInOneRow[5]+"\n"+fileInOneRow[6]+"\n"
+		except Exception as e:
+			#por eso se encuentra vacia aqui
+			matrix = ""
+		if file.validacion() == True:
+			#si la validacion fue exitosa entonces empieza ejecutando todas las funciones una por una en orden tal y como las venias leyendo
+			print "el archivo no contiene ningun error"
+			asciiToNumber = AsciiToNumber(fileInOneRow)
+			caracter = asciiToNumber.separarCaracteres()
+			number = asciiToNumber.agruparCaracteres()
+			intMatrix = asciiToNumber.agruparNumeros()
+			intNumber = asciiToNumber.reemplazar()
+			operationIndex = asciiToNumber.posicionOperador()
+			operationType = asciiToNumber.operacion()
+			calculator = Calculator(intNumber, operationIndex, operationType)
+			resultado = calculator.calculadora()
+			print (line+O+line)
+			print matrix
+			print (line+R+line)
+			numeroAscii = NumberToAscii(resultado)
+			cortarDecimales = numeroAscii.cortarDecimales()
+			numeroArreglo = numeroAscii.numeroArreglo()
+			asciiArreglo = numeroAscii.asciiArreglo()
+			ordenarMatriz = numeroAscii.ordenarMatriz()
+			matrizResultado = numeroAscii.matrizAstring()
+			#aqui es donde se muestra en la interfaz los datos
+			Operation.config(text=(line+O+line))
+			Matriz.config(text=matrix)
+			Result.config(text=(line+R+line))
+			if resultado == "No se puede dividir por CERO":
+				#en caso de que la calculadora, la cual es la que se encarga de retornar el resultado, haya llegado a errorZeroDivision
+				#entonces se muestra en pantalla el error de no se puede dividir por cero
+				OUTPUT.config(text=resultado)
+				print resultado
+			else:
+				#en caso de que no exista ese error muestra por pantalla la matriz
+				OUTPUT.config(text=matrizResultado)
+				print matrizResultado
+			#al final el mensaje principal se reinicia por seacaso ocurra un error no lo muestre al usuario
+			message.config(text="")
+		else:
+			#si la validacion fallo, existen dos tipos de error
+			#error de fila, cuando una o varias son mas largas que las otras
+			if file.validacion() == ("\n" + failure + "\n" + rowError):
+				#abre una ventana aparte que muestra el error y vacia todos los demas textos en pantalla
+				tkMessageBox.showwarning("warning", (file.validacion()))
+				message.config(text="")
+				Operation.config(text="")
+				Result.config(text="")
+				OUTPUT.config(text="")
+				Matriz.config(text="")
+			elif file.validacion() == ("\n" + failure + "\n" + caracterError):
+				#error de caracter, en caso de que haya un caracter que no coincida con un punto o una equis
+				#abre una ventana aparte que muestra el error y vacia todos los demas textos en pantalla
+				tkMessageBox.showwarning("warning", (file.validacion()))
+				message.config(text="")
+				Operation.config(text="")
+				Result.config(text="")
+				OUTPUT.config(text="")
+				Matriz.config(text="")
+			print file.validacion()
+			print fileInOneRow
+	except SyntaxError:
+		#quiere decir que en caso de que exista un error de sintaxis solo reinicie el programa
+		pass
+	except NameError:
+		#quiere decir que en caso de que el usuario haya escrito mal algun nombre reinicie el programa para evitar complicaciones
+		pass
+	except IOError:
+		#IOError es el error que lanza cuando no se encuentra el archivo, por tanto en el caso de surgir este error
+		print notFound
+		#se imprime esta ventana mostrando el mensaje notFound de las constantes
+		tkMessageBox.showerror("Error", notFound)
+		#todas estas lineas son para que cuando de un error todos los textos que estan en la interfaz se vacien y no muestre nada de un archivo anterior
+		message.config(text="")
+		Operation.config(text="")
+		Result.config(text="")
+		OUTPUT.config(text="")
+		Matriz.config(text="")
+	except IndexError:
+		#al igual que con la anterior pero cuando da IndexError significa que la matriz no coincidio con ninguna guardada en nuestros datos
+		print notMatch
+		#muestra el mensaje al usuario de notMatch en las constantes
+		tkMessageBox.showwarning("warning", failure+"\n"+notMatch)
+		#vacia todos los textos en pantalla
+		message.config(text="")
+		Operation.config(text="")
+		Result.config(text="")
+		OUTPUT.config(text="")
+		Matriz.config(text="")
 
+def searchFile():
+	archivo=askopenfile()
+	buscar(archivo.name)
+	box.insert(0, archivo.name)
+
+
+#_____________________________________________________________________________________________________________________________________________________________#
 
 #primero se crea la variable de mi ventana principal llamada root
 root = Tk()
@@ -519,8 +624,7 @@ box = Entry(leftFrame, textvariable="")
 box.grid(column=0,row=1,sticky=W+E+N+S)
 
 #boton para buscar que esta mapeado para que cuando haga click ejecute la funcion main
-submitFile = Button(leftFrame, text="Buscar", fg="black")
-submitFile.bind("<Button-1>", main)
+submitFile = Button(leftFrame, text="Buscar", fg="black", command=searchFile)
 submitFile.grid(column=0,row=2,sticky=W+E+N+S)
 
 #boton de ayuda para que cuando se le haga click ejecute la funcion instrucciones

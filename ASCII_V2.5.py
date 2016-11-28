@@ -4,6 +4,7 @@
 ----- luego Tkinter nos permite crear una interfaz grafica
 ----- tkFont nos permite cambiar las fuentes de la interfaz grafica, es necesario ya que las matrices necesitan la fuente FixedSys
 ----- tkMessageBox es un modulo que nos permite lanzar diversos mensajes al usuario en forma de cajas
+----- tkFileDialog nos permite crear una ventana extra para buscar archivos en el computador
 """
 
 from sys import *
@@ -89,6 +90,7 @@ PUNT = [['.','.','.','.','.'],['.','.','.','.','.'],['.','.','.','.','.'],['.','
 ASCII = [NUM0,NUM1,NUM2,NUM3,NUM4,NUM5,NUM6,NUM7,NUM8,NUM9,SMAS,SMEN,SMUL,SDIV,PUNT]
 STR = ['0','1','2','3','4','5','6','7','8','9','+','-','*','/','.']
 
+#Transforma el string fila[i] en una fila de "n" elementos (con n como el largo del string de fila[i])
 def separarCaracteres(archivoEnUnaLinea):
 	caracter = []
 	for i in range(7):
@@ -96,6 +98,7 @@ def separarCaracteres(archivoEnUnaLinea):
 		caracter[i] = list(archivoEnUnaLinea[i])
 	return caracter
 
+#Guarda un numero ASCII diferente en cada columna de la matriz numero[i][j]
 def agruparCaracteres(caracter):
 	numero = []
 	for i in range(7):
@@ -106,6 +109,7 @@ def agruparCaracteres(caracter):
 				numero[i][j].append(caracter[i][k+6*j])
 	return numero
 
+#Cada elemento de enteroMatriz[i] representa un numero distinto
 def agruparNumeros(numero, caracter):
 	enteroMatriz = []
 	for i in range(int(len(caracter[0])/6)+1):
@@ -114,6 +118,8 @@ def agruparNumeros(numero, caracter):
 			enteroMatriz[i].append(numero[j][i])
 	return enteroMatriz
 
+#Inserta un numero (u operacion) en forma de string dentro de la matriz enteroNumero
+#que equivale al numero en formato ASCII en la posicion [i]	
 def reemplazar(enteroMatriz):
 	enteroNumero = []
 	for i in range(len(enteroMatriz)):
@@ -122,6 +128,7 @@ def reemplazar(enteroMatriz):
 				enteroNumero.append(STR[j])
 	return enteroNumero
 
+#Ubica la posicion del operador 
 def posicionOperador(enteroNumero):
 	indiceOperacion = 1
 	if '+' in enteroNumero:
@@ -134,6 +141,7 @@ def posicionOperador(enteroNumero):
 		indiceOperacion = enteroNumero.index('/')
 	return indiceOperacion
 
+#Indica que tipo de operacion se va a realizar
 def operacion(enteroNumero):
 	tipoOperacion = '+'
 	if '+' in enteroNumero:
@@ -150,6 +158,7 @@ def operacion(enteroNumero):
 
 #FUNCION QUE SE ENCARGA DE CALCULAR LOS NUMEROS
 
+#Transforma los numeros a enteros y los opera
 def calculadora(enteroNumero, indiceOperacion, tipoOperacion):
 	numeroSt1 = ''
 	numeroSt2 = ''
@@ -187,6 +196,7 @@ def calculadora(enteroNumero, indiceOperacion, tipoOperacion):
 
 #FUNCIONES QUE SE ENCARGAN DE PASAR EL NUMERO A ASCII
 
+#se reescriben algunos numeros y operadores para facilitar el trabajo
 NUM0 = ['xxxxx','x...x','x...x','x...x','x...x','x...x','xxxxx']
 NUM1 = ['....x','....x','....x','....x','....x','....x','....x']
 NUM2 = ['xxxxx','....x','....x','xxxxx','x....','x....','xxxxx']
@@ -262,7 +272,7 @@ def asciiArreglo(numeroEnArreglo):
 			matrizASCII.append(NUM9)
 	return matrizASCII
 
-#esta funcion ordena los elementos de manera que podamos tener 7 filas totalmente ordenadas e identificadas para poder saber que numero se trata
+#esta funcion identifica y ordena las filas, luego las acomoda en una matriz final
 def ordenarMatriz(matrizASCII):
 	matrizFinal = []
 	row1 = []
@@ -338,7 +348,7 @@ def ordenarMatriz(matrizASCII):
 #_____________________________________________________________________________________________________________________________________________________________#
 
 
-#SE JUNTARON las variables para poder cambiarlas facilmente en un futuro
+#SE JUNTARON las constantes para poder cambiarlas facilmente en un futuro
 notFound = "NO se ha encontrado el archivo, por favor intente nuevamente"
 notMatch = "el archivo no coincide con nada almacenado \n este error probablemente se deba a un caracter mal ubicado"
 linea = "_________________________________________________________________________\n"
@@ -350,6 +360,7 @@ errorCaracter = "algun(os) caracter(es) no corresponde(n) a lo solicitado, modif
 
 #_____________________________________________________________________________________________________________________________________________________________#
 
+#FUNCION PRINCIPAL DEL PROGRAMA
 def main(event):
 	try:
 		nombreArchivo = box.get()
@@ -446,7 +457,7 @@ def main(event):
 
 #_____________________________________________________________________________________________________________________________________________________________#
 
-#esta funcion se ejecuta cuando el usuario presiona el boton de ayuda y le muestra un breve resumen junto con instrucciones de como proceder
+#esta funcion se ejecuta cuando el usuario presiona el boton de ayuda, muestra la ventana ayuda
 def instrucciones():
 	instrucciones1 = "-ingresa el nombre del archivo en la caja de texto. \nEl archivo debe contener reglas basicas en formato ASCII para ser leido\n"
 	instrucciones2 = "se realizara el proceso matematico correspondiente \nse mostrara en pantalla el resultado obtenido"
@@ -454,8 +465,8 @@ def instrucciones():
 
 #_____________________________________________________________________________________________________________________________________________________________#
 
-#COMO LA OTRA FUNCION TIENE EL ARGUMENTO EVENT NO SE PUEDE USAR PARA OTRAS COSAS SIN MAPEAR
 #ESTA FUNCION ES UNA COPIA EXACTA AL MAIN PERO ESTA PROGRAMADA PARA QUE LA USE EL BUSCADOR DE ARCHIVOS GRAFICO
+#la otra no se puede usar con  un argumento dado ya que contiene el argumento event que permite asignar teclas a diferentes funciones
 
 def buscar(nombreArchivo):
 	try:
@@ -558,20 +569,22 @@ def searchFile():
 
 #_____________________________________________________________________________________________________________________________________________________________#
 
+#INTERFAZ GRAFICA
+
 #primero se crea la variable de mi ventana principal llamada root
 root = Tk()
 #le agrego un titulo a mi ventana
 root.title("Calculadora ASCII")
-#luego mapeo la tecla ENTER para que ejecute la funcion main y haga el papel del boton buscar
+#luego asigno la tecla ENTER para que ejecute la funcion main y haga el papel del boton buscar
 root.bind("<Return>", main)
-# en Sistemas Operativos de linux no permite cambiar el icono de la ventana por lo que podemos detectar si el usuario lo abre desde linux o windows
-# con un simple try, de abrir el programa en linux se le mostrara un mensaje explicandole el fallo y recomendandole abrirlo en windows
+# en Sistemas Operativos de linux no permite cambiar el icono de la ventana por lo que podemos saber que S.O. se trata
+# intenta abrir el programa en linux se le mostrara un mensaje explicandole el fallo y recomendandole abrirlo en windows
 try:
 	ubuntu = False
  	root.iconbitmap('icon.ico')
 except Exception as e:
 	ubuntu = True
- 	tkMessageBox.showinfo("linux detectado", "debido a que usas una distro de linux nos es imposible cambiar \n el icono de la ventana, para una proxima ves en windows funcionara mucho mejor")
+ 	tkMessageBox.showinfo("linux detectado", "debido a que usas una distro de linux nos es imposible cambiar\nel icono de la ventana, para una proxima ves en windows funcionara mucho mejor")
 
 #fuentes
 #para ubuntu u otra distro de linux debes descargar una fuente monoespaciada, en este caso se usa anonymous pro para ubuntu
